@@ -46,23 +46,14 @@ int main()
 	insert(1);
 	
 	int part = 5;
+	printf("Input:\n");
 	print();
     partition(part);
+    printf("Output:\n");
 	print();
 	
     
 }
-
-/*void insert_beg(int data)
-{
-    //Insert a Node in the beginning of a Linkedlist
-    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
-    temp->data = data;
-    temp->link = head;//this node now points to the previous 1st Node
-    head = temp; //head now points to this node
-    
-    return;
-}*/
 
 int insert(int data)
 {
@@ -90,6 +81,21 @@ int insert(int data)
     return 0;
 }
 
+/*******************************************************************************
+ * partition : This function takes the patition as the input. It rearranges the 
+ * Linked List such that all nodes less than x come before all nodes greater than 
+ * or equal to x
+ * 
+ * We initialize two local pointer to struct Node* head_t and tail_t to head.
+ * We then traverse the linked list one node at a time.
+ * If the value of the current node is greater than or equal to the partition, 
+ * it is appended it to the tail.
+ * If the current node is less than the partition it is appended before the head.
+ * 
+ * Finally we set the tail_t->next = NULL and head = head_t.
+ * we then return head for the resultant linked list
+ */
+ 
 void partition(int part)
 {
     
@@ -102,18 +108,15 @@ void partition(int part)
     while(temp != NULL)
     {
         temp1 = temp->link;
-        printf("Current Node is at %d\n",temp->data);
         if(temp->data >= part)
         {
             tail_t->link = temp;
             tail_t = temp;
-            printf("Tail is now at %d\n",tail_t->data);
         }
         else
         {
             temp->link = head_t;
             head_t = temp;
-            printf("Head is now at %d\n",head_t->data);
         }
         temp = temp1;
     }
